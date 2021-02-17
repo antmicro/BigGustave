@@ -359,7 +359,7 @@
             return (a << 24) + (r << 16) + (g << 8) + b;
         }
 
-        private static (byte r, byte g, byte b, byte a) ColorIntToPixel(int i) => ((byte)(i >> 16), (byte)(i >> 8), (byte)i, (byte)(i >> 24));
+        private static Rgba ColorIntToPixel(int i) => new Rgba((byte)(i >> 16), (byte)(i >> 8), (byte)i, (byte)(i >> 24));
 
         /// <summary>
         /// Options for configuring generation of PNGs from a <see cref="PngBuilder"/>.
@@ -378,5 +378,21 @@
             /// </summary>
             public int MaxDegreeOfParallelism { get; set; } = 1;
         }
+    }
+
+    public struct Rgba
+    {
+        public Rgba(byte r, byte g, byte b, byte a)
+        {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        }
+
+        public byte r;
+        public byte g;
+        public byte b;
+        public byte a;
     }
 }
