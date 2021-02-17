@@ -117,7 +117,9 @@
 
                 var bytesOut = output.ToArray();
 
-                var (bytesPerPixel, samplesPerPixel) = Decoder.GetBytesAndSamplesPerPixel(imageHeader);
+                var bytesAndSamplesPerPixel = Decoder.GetBytesAndSamplesPerPixel(imageHeader);
+                var bytesPerPixel = bytesAndSamplesPerPixel.bytesPerPixel;
+                var samplesPerPixel = bytesAndSamplesPerPixel.samplesPerPixel;
 
                 bytesOut = Decoder.Decode(bytesOut, imageHeader, bytesPerPixel, samplesPerPixel);
 

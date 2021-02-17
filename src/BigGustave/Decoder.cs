@@ -4,13 +4,13 @@
 
     internal static class Decoder
     {
-        public static (byte bytesPerPixel, byte samplesPerPixel) GetBytesAndSamplesPerPixel(ImageHeader header)
+        public static BytesAndSamplesPerPixel GetBytesAndSamplesPerPixel(ImageHeader header)
         {
             var bitDepthCorrected = (header.BitDepth + 7) / 8;
 
             var samplesPerPixel = SamplesPerPixel(header);
 
-            return ((byte)(samplesPerPixel * bitDepthCorrected), samplesPerPixel);
+            return new BytesAndSamplesPerPixel((byte)(samplesPerPixel * bitDepthCorrected), samplesPerPixel);
         }
 
         public static byte[] Decode(byte[] decompressedData, ImageHeader header, byte bytesPerPixel, byte samplesPerPixel)
@@ -207,5 +207,17 @@
 
             return pb <= pc ? b : c;
         }
+    }
+
+    public struct BytesAndSamplesPerPixel
+    {
+        public BytesAndSamplesPerPixel(byte bytesPerPixel, byte samplesPerPixel)
+        {
+            this.bytesPerPixel = bytesPerPixel;
+            this.samplesPerPixel = samplesPerPixel;
+        }
+
+        public byte bytesPerPixel;
+        public byte samplesPerPixel;
     }
 }
