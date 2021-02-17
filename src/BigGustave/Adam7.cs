@@ -98,7 +98,7 @@
             return (indices.Length * (header.Width / 8)) + additionalColumns;
         }
 
-        public static (int x, int y) GetPixelIndexForScanlineInPass(ImageHeader header, int pass, int scanlineIndex, int indexInScanline)
+        public static PixelIndexForScanlineInPass GetPixelIndexForScanlineInPass(ImageHeader header, int pass, int scanlineIndex, int indexInScanline)
         {
             var columnIndices = PassToScanlineColumnIndex[pass + 1];
             var rows = PassToScanlineGridIndex[pass + 1];
@@ -108,7 +108,19 @@
             var precedingRows = 8 * (scanlineIndex / rows.Length);
             var precedingCols = 8 * (indexInScanline / columnIndices.Length);
 
-            return (precedingCols + columnIndices[actualCol], precedingRows + rows[actualRow]);
+            return new PixelIndexForScanlineInPass(precedingCols + columnIndices[actualCol], precedingRows + rows[actualRow]);
         }
+    }
+
+    public struct PixelIndexForScanlineInPass
+    {
+        public PixelIndexForScanlineInPass(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int x;
+        public int y;
     }
 }
