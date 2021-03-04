@@ -6,7 +6,7 @@
     /// <summary>
     /// The high level information about the image.
     /// </summary>
-    public readonly struct ImageHeader
+    public struct ImageHeader
     {
         internal static readonly byte[] HeaderBytes = {
             73, 72, 68, 82

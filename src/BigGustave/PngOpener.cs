@@ -135,7 +135,7 @@
 
         private static bool TryReadChunkHeader(Stream stream, out ChunkHeader chunkHeader)
         {
-            chunkHeader = default;
+            chunkHeader = default(ChunkHeader);
 
             var position = stream.Position;
             if (!StreamHelper.TryReadHeaderBytes(stream, out var headerBytes))

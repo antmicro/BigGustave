@@ -1,6 +1,6 @@
 ﻿namespace BigGustave
 {
-    internal readonly struct HeaderValidationResult
+    internal struct HeaderValidationResult
     {
         public static readonly byte[] ExpectedHeader = {
             137,

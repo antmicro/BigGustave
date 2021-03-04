@@ -5,7 +5,7 @@
     /// <summary>
     /// The header for a data chunk in a PNG file.
     /// </summary>
-    public readonly struct ChunkHeader
+    public struct ChunkHeader
     {
         /// <summary>
         /// The position/start of the chunk header within the stream.
