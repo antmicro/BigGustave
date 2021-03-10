@@ -127,24 +127,24 @@
 
         private static void ReverseFilter(byte[] data, FilterType type, int previousRowStartByteAbsolute, int rowStartByteAbsolute, int byteAbsolute, int rowByteIndex, int bytesPerPixel)
         {
-            byte GetLeftByteValue()
+            Func<byte> GetLeftByteValue = () =>
             {
                 var leftIndex = rowByteIndex - bytesPerPixel;
                 var leftValue = leftIndex >= 0 ? data[rowStartByteAbsolute + leftIndex] : (byte)0;
                 return leftValue;
-            }
+            };
 
-            byte GetAboveByteValue()
+            Func<byte> GetAboveByteValue = () =>
             {
                 var upIndex = previousRowStartByteAbsolute + rowByteIndex;
                 return upIndex >= 0 ? data[upIndex] : (byte)0;
-            }
+            };
 
-            byte GetAboveLeftByteValue()
+            Func<byte> GetAboveLeftByteValue = () =>
             {
                 var index = previousRowStartByteAbsolute + rowByteIndex - bytesPerPixel;
                 return index < previousRowStartByteAbsolute || previousRowStartByteAbsolute < 0 ? (byte)0 : data[index];
-            }
+            };
 
             // Moved out of the switch for performance.
             if (type == FilterType.Up)
