@@ -319,38 +319,8 @@
         /// </summary>
         private void AttemptCompressionOfRawData(byte[] rawData, SaveOptions options)
         {
-            if (!options.AttemptCompression)
-            {
-                return;
-            }
-
-            var bytesPerScanline = 1 + (bytesPerPixel * width);
-            var scanlineCount = rawData.Length / bytesPerScanline;
-
-            var scanData = new byte[bytesPerScanline - 1];
-
-            for (var scanlineRowIndex = 0; scanlineRowIndex < scanlineCount; scanlineRowIndex++)
-            {
-                var sourceIndex = (scanlineRowIndex * bytesPerScanline) + 1;
-
-                Array.Copy(rawData, sourceIndex, scanData, 0, bytesPerScanline - 1);
-
-                var noneFilterSum = 0;
-                for (int i = 0; i < scanData.Length; i++)
-                {
-                    noneFilterSum += scanData[i];
-                }
-
-                var leftFilterSum = 0;
-                for (int i = 0; i < scanData.Length; i++)
-                {
-
-                }
-                /* 
-                 * A heuristic approach is to use adaptive filtering as follows: 
-                 *    independently for each row, apply all five filters and select the filter that produces the smallest sum of absolute values per row. 
-                 */
-            }
+            //this method had no externally visible effect in the original code
+            //leaving it blank
         }
 
         private static int PixelToColorInt(Pixel p) => PixelToColorInt(p.R, p.G, p.B, p.A);
